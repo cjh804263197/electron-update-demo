@@ -24,6 +24,15 @@ module.exports = {
     'import/newline-after-import': 0,
     'no-multi-assign': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'arrow-parens': 0,
+    'padded-blocks': 0,
+    'no-unused-expressions': 0,
+    'no-plusplus': 0,
+    'quote-props': 0,
+    'class-methods-use-this': 0,
+    'no-await-in-loop': 0,
+    'no-restricted-syntax': 0,
+    'max-len': 0,
   }
 }

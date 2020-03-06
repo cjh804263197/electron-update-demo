@@ -1,21 +1,33 @@
 import { app, BrowserWindow } from 'electron' // eslint-disable-line
 import { autoUpdater } from 'electron-updater';
+import fs from 'fs';
+import path from 'path';
+import HotUpdate from './HotUpdate';
 
+const appVersion = require('../../package.json').version;
+
+console.log('appVersion => ', appVersion);
+
+if (process.env.NODE_ENV !== 'development') {
+  const bundleData = fs.readFileSync(path.join(__dirname, '/bundle/bundle.json'), { encoding: 'utf-8' });
+  const bundleObj = JSON.parse(bundleData);
+  console.log('bundleVersion => ', bundleObj.version);
+}
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
+  global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
 
 let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:9080'
-  : `file://${__dirname}/index.html`;
+  : `file://${path.join(__dirname, '/bundle')}/index.html`;
 
-function createWindow() {
+async function createWindow() {
   /**
    * Initial window options
    */
@@ -55,11 +67,19 @@ app.on('activate', () => {
  * support auto updating. Code Signing with a valid certificate is required.
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
+autoUpdater.on('update-not-available', () => {
+  console.log('暂未发现新版本 => ');
+  new HotUpdate(mainWindow).checkUpdate();
 });
 
 autoUpdater.on('update-available', (info) => {
   console.log('发现了新版本 => ', info);
+});
+
+autoUpdater.on('download-progress', progressObj => {
+  console.log('正在下载 => ', progressObj);
+});
+
+autoUpdater.on('update-downloaded', () => {
+  autoUpdater.quitAndInstall();
 });

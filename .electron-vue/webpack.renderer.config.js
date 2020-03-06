@@ -140,7 +140,7 @@ let rendererConfig = {
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '../dist/electron')
+    path: path.join(__dirname, '../dist/electron/bundle')
   },
   resolve: {
     alias: {
@@ -176,6 +176,10 @@ if (process.env.NODE_ENV === 'production') {
         from: path.join(__dirname, '../static'),
         to: path.join(__dirname, '../dist/electron/static'),
         ignore: ['.*']
+      },
+      {
+        from: path.join(__dirname, '../src/bundle.json'),
+        to: path.join(__dirname, '../dist/electron/bundle/bundle.json')
       }
     ]),
     new webpack.DefinePlugin({

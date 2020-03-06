@@ -4,7 +4,7 @@
     <main>
       <div class="left-side">
         <span class="title">
-          Welcome to your new project! this is version 0.0.1
+          Welcome to your new project! this is version 0.0.2
         </span>
         <system-information></system-information>
       </div>

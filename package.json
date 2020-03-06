@@ -1,6 +1,6 @@
 {
   "name": "electron-update-demo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "chenjiahui <mr_chenjiahui@163.com>",
   "description": "Test auto update & hot update demo",
   "license": null,
@@ -28,6 +28,9 @@
     "directories": {
       "output": "build"
     },
+    "asarUnpack": [
+      "dist/electron/bundle/"
+    ],
     "files": [
       "dist/electron/**/*"
     ],
@@ -36,8 +39,7 @@
         "provider": "github",
         "owner": "cjh804263197",
         "repo": "electron-update-demo",
-        "releaseType": "draft",
-        "token": "cc5f3b93589b1a5819fcf49b9a0a0d9bfb7b2f97"
+        "releaseType": "draft"
       }
     ],
     "dmg": {
@@ -56,7 +58,7 @@
       ]
     },
     "mac": {
-      "asar": true,
+      "asar": false,
       "icon": "build/icons/icon.icns"
     },
     "win": {
@@ -67,8 +69,11 @@
     }
   },
   "dependencies": {
+    "adm-zip": "^0.4.14",
     "axios": "^0.18.0",
     "electron-updater": "^4.2.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",

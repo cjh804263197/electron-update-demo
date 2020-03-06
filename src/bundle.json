@@ -1,0 +1,6 @@
+{
+  "name": "electron-update-demo-render",
+  "version": "0.0.2",
+  "maxAppVersion": "0.0.2",
+  "minAppVersion": "0.0.1"
+}
