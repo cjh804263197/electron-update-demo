@@ -67,8 +67,12 @@
     }
   },
   "dependencies": {
+    "adm-zip": "^0.4.14",
     "axios": "^0.18.0",
     "electron-updater": "^4.2.2",
+    "js-sha512": "^0.8.0",
+    "js-yaml": "^3.13.1",
+    "request-promise": "^4.2.5",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",

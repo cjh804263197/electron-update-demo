@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from 'electron' // eslint-disable-line
 import { autoUpdater } from 'electron-updater';
+// import { testAdmZip } from './testAdmZip';
+import { testGithubRelease } from './githubRelease';
 
 
 /**
@@ -32,6 +34,9 @@ function createWindow() {
   });
 
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates();
+
+  // testAdmZip();
+  testGithubRelease();
 }
 
 app.on('ready', createWindow);
