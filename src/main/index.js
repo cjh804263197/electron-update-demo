@@ -47,7 +47,7 @@ async function createWindow() {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates();
 
   // testAdmZip();
-  testGithubRelease();
+  // testGithubRelease();
 }
 
 app.on('ready', createWindow);
