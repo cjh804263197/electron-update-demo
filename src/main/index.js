@@ -1,9 +1,10 @@
 import { app, BrowserWindow } from 'electron' // eslint-disable-line
 import { autoUpdater } from 'electron-updater';
-import fs from 'fs';
-import path from 'path';
+// import { testAdmZip } from './testAdmZip';
+import { testGithubRelease } from './githubRelease';
 import HotUpdate from './HotUpdate';
-
+const fs = require('fs');
+const path = require('path');
 const appVersion = require('../../package.json').version;
 
 console.log('appVersion => ', appVersion);
@@ -44,6 +45,9 @@ async function createWindow() {
   });
 
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates();
+
+  // testAdmZip();
+  testGithubRelease();
 }
 
 app.on('ready', createWindow);
