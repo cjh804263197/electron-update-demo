@@ -73,6 +73,8 @@
     "axios": "^0.18.0",
     "compare-versions": "^3.6.0",
     "electron-updater": "^4.2.2",
+    "js-sha512": "^0.8.0",
+    "js-yaml": "^3.13.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "vue": "^2.5.16",
