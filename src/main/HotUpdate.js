@@ -2,6 +2,7 @@ import rp from 'request-promise';
 import path from 'path';
 import fs from 'fs';
 import AdmZip from 'adm-zip';
+import compareVersions from 'compare-versions';
 import utils from './utils';
 
 export default class HotUpdate {
@@ -19,9 +20,10 @@ export default class HotUpdate {
         headers: {
           // User-Agent is required, see https://developer.github.com/v3/#user-agent-required
           'User-Agent': 'electron-hot-update-release',
-          'Authorization': 'cc5f3b93589b1a5819fcf49b9a0a0d9bfb7b2f97',
         },
         json: true,
+        rejectUnauthorized: false, // resolve Error: connect ECONNREFUSED, see https://github.com/request/request-promise/issues/225#issuecomment-379802733
+        insecure: true,
       };
       const res = await rp(option);
       const releaseBundleVersion = res.tag_name;
@@ -29,7 +31,7 @@ export default class HotUpdate {
       const bundleObj = JSON.parse(bundleData);
       const localBundleVersion = bundleObj.version;
       console.log('线上版本号 => ', utils.toNum(releaseBundleVersion), '本地版本号 => ', utils.toNum(localBundleVersion));
-      if (utils.toNum(releaseBundleVersion) > utils.toNum(localBundleVersion) && res.assets && Array.isArray(res.assets)) {
+      if (compareVersions(releaseBundleVersion, localBundleVersion) > 0 && res.assets && Array.isArray(res.assets)) {
         // 下载热更新文件
         for (const asset of res.assets) {
           console.log(`${asset.name}将要被下载`);
