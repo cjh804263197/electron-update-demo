@@ -1,8 +1,8 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, dialog } from 'electron' // eslint-disable-line
 import { autoUpdater } from 'electron-updater';
 // import { testAdmZip } from './testAdmZip';
-import { testGithubRelease } from './githubRelease';
-import HotUpdate from './HotUpdate';
+// import { testGithubRelease } from './githubRelease';
+// import HotUpdate from './HotUpdate';
 const fs = require('fs');
 const path = require('path');
 const appVersion = require('../../package.json').version;
@@ -73,7 +73,16 @@ app.on('activate', () => {
  */
 autoUpdater.on('update-not-available', () => {
   console.log('暂未发现新版本 => ');
-  new HotUpdate(mainWindow).checkUpdate();
+  const options = {
+    alwaysOnTop: true,
+    type: 'question',
+    title: 'MeshkitDesktop 更新提示',
+    message: '最新版本已经下载完成，请立即更新。',
+    detail: '请立即更新，新版本增加了一些功能，修复了一些错误。\n 1.更新了xxx\n 2.修复了xxx',
+    buttons: ['立即更新', '下次启动更新'],
+  };
+  dialog.showMessageBox(mainWindow, options, () => {});
+  // new HotUpdate(mainWindow).checkUpdate();
 });
 
 autoUpdater.on('update-available', (info) => {

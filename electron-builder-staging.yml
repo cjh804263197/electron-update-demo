@@ -1,0 +1,41 @@
+artifactName: "${productName}-${version}.${ext}" # 应用最终的名称
+productName: auto-update
+appId: com.kiwi.update
+npmRebuild: true # 是否在开始编译前重构原生依赖,可先尝试true, 如果出现问题再修改为false
+directories:
+  output: build
+  buildResources: build
+files:
+  - filter:
+      - dist/electron/**/*
+publish:
+  - provider: github
+    owner: cjh804263197
+    repo: electron-update-demo
+    releaseType: draft
+nsis:
+  oneClick: false # 是否一键安装(静默安装)
+  allowToChangeInstallationDirectory: true # 允许用户选择安装位置
+  createDesktopShortcut: always # 创建桌面快捷方式
+  createStartMenuShortcut: true # 创建开始菜单快捷方式
+  runAfterFinish: true # 安装完成后是否勾选立即执行
+dmg:
+  contents:
+    - x: 410
+      'y': 150
+      type: link
+      path: /Applications
+    - x: 130
+      'y': 150
+      type: file
+mac:
+  asar: false
+  icon: build/icons/icon.icns
+win:
+  icon: build/icons/icon.ico
+  target:
+    - nsis
+  verifyUpdateCodeSignature: false # 是否需要验证签名
+  # requestedExecutionLevel: requireAdministrator # 执行等级(是否需要管理员权限,通常情况不需要)
+linux:
+  icon: build/icons
