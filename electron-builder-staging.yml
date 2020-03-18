@@ -19,6 +19,7 @@ nsis:
   createDesktopShortcut: always # 创建桌面快捷方式
   createStartMenuShortcut: true # 创建开始菜单快捷方式
   runAfterFinish: true # 安装完成后是否勾选立即执行
+  perMachine: false # 是否开启安装时权限限制（此电脑或当前用户）
 dmg:
   contents:
     - x: 410
