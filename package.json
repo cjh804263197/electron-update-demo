@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.14",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "compare-versions": "^3.6.0",
     "electron-updater": "^4.2.2",
     "js-sha512": "^0.8.0",
